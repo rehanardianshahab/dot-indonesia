@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as TodoImport } from './routes/todo'
 import { Route as ProductImport } from './routes/product'
+import { Route as LoginImport } from './routes/login'
 import { Route as CartImport } from './routes/cart'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProductProductNameProductIdImport } from './routes/product_.$productName.$productId'
@@ -28,6 +29,12 @@ const TodoRoute = TodoImport.update({
 const ProductRoute = ProductImport.update({
   id: '/product',
   path: '/product',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -68,6 +75,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
     '/product': {
       id: '/product'
       path: '/product'
@@ -97,6 +111,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/todo': typeof TodoRoute
   '/product/$productName/$productId': typeof ProductProductNameProductIdRoute
@@ -105,6 +120,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/todo': typeof TodoRoute
   '/product/$productName/$productId': typeof ProductProductNameProductIdRoute
@@ -114,6 +130,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/login': typeof LoginRoute
   '/product': typeof ProductRoute
   '/todo': typeof TodoRoute
   '/product_/$productName/$productId': typeof ProductProductNameProductIdRoute
@@ -124,15 +141,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cart'
+    | '/login'
     | '/product'
     | '/todo'
     | '/product/$productName/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cart' | '/product' | '/todo' | '/product/$productName/$productId'
+  to:
+    | '/'
+    | '/cart'
+    | '/login'
+    | '/product'
+    | '/todo'
+    | '/product/$productName/$productId'
   id:
     | '__root__'
     | '/'
     | '/cart'
+    | '/login'
     | '/product'
     | '/todo'
     | '/product_/$productName/$productId'
@@ -142,6 +167,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
+  LoginRoute: typeof LoginRoute
   ProductRoute: typeof ProductRoute
   TodoRoute: typeof TodoRoute
   ProductProductNameProductIdRoute: typeof ProductProductNameProductIdRoute
@@ -150,6 +176,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
+  LoginRoute: LoginRoute,
   ProductRoute: ProductRoute,
   TodoRoute: TodoRoute,
   ProductProductNameProductIdRoute: ProductProductNameProductIdRoute,
@@ -167,6 +194,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/cart",
+        "/login",
         "/product",
         "/todo",
         "/product_/$productName/$productId"
@@ -177,6 +205,9 @@ export const routeTree = rootRoute
     },
     "/cart": {
       "filePath": "cart.tsx"
+    },
+    "/login": {
+      "filePath": "login.tsx"
     },
     "/product": {
       "filePath": "product.tsx"

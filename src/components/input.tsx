@@ -3,6 +3,7 @@ import React from 'react';
 interface InputItem {
   name: string;
   value?: string;
+  type?: string;
   onValueChange: (value: string) => void;
   customClass?: string;
   error?: string;
@@ -11,6 +12,7 @@ interface InputItem {
 export default function Input({
   name,
   value,
+  type = 'text',
   onValueChange,
   customClass = '',
   error,
@@ -19,7 +21,7 @@ export default function Input({
     <div>
       <input
         name={name}
-        type="text"
+        type={type}
         value={value}
         onChange={(e) => onValueChange(e.target.value)}
         className={`${customClass} ${
