@@ -16,6 +16,10 @@ export default function Navbar() {
       link: "/product",
       label: "Shop",
     },
+    {
+      link: "/login",
+      label: "Login",
+    },
   ];
 
   const cart = useCartStore((state) => state.cart);
