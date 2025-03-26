@@ -7,7 +7,7 @@ export default function CartList() {
 
   const totalAmount = cart.reduce(
     (total, item) => total + Number(item.quantity) * item.price,
-    0
+    0,
   );
 
   return (
@@ -40,9 +40,12 @@ export default function CartList() {
                     Total: {(Number(item.quantity) * item.price).toFixed(2)}
                   </p>
                   <div className="text-sm text-yellow-500 flex items-center">
-                    {Array.from({ length: Math.round(Number(item.rating)) }, (_, i) => (
-                      <span key={i}>⭐</span>
-                    ))}
+                    {Array.from(
+                      { length: Math.round(Number(item.rating)) },
+                      (_, i) => (
+                        <span key={i}>⭐</span>
+                      ),
+                    )}
                     <span className="ml-2 text-gray-500">({item.rating})</span>
                   </div>
                 </div>
@@ -59,7 +62,8 @@ export default function CartList() {
 
           <div className="mt-6 p-4 border-t text-right">
             <h3 className="text-lg font-semibold">
-              Total Amount: <span className="text-green-600">${totalAmount.toFixed(2)}</span>
+              Total Amount:{' '}
+              <span className="text-green-600">${totalAmount.toFixed(2)}</span>
             </h3>
           </div>
         </>

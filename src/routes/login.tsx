@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import Button from '../components/button';
 import Input from '../components/input';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import { Bounce, toast } from 'react-toastify';
 
@@ -19,19 +19,19 @@ function RouteComponent() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const notifySuccess = (message: string) =>
-  toast.success(message, {
-    position: 'top-center',
-    autoClose: 2500,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: 'light',
-    transition: Bounce,
-  });
+    toast.success(message, {
+      position: 'top-center',
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+      transition: Bounce,
+    });
 
-  const handleChange = (key: string , e: string) => {
+  const handleChange = (key: string, e: string) => {
     setForm((prev) => ({ ...prev, [key]: e }));
   };
 
@@ -44,8 +44,8 @@ function RouteComponent() {
       if (form.username === 'admin' && form.password === 'admin') {
         localStorage.setItem('isLoggedIn', 'true'); // Simpan status login
         notifySuccess('Login successful!');
-        setForm({username: '',password:''})
-        navigate({ to: "/" });
+        setForm({ username: '', password: '' });
+        navigate({ to: '/' });
       } else {
         setError('Invalid username or password');
       }
@@ -71,7 +71,7 @@ function RouteComponent() {
               value={form.username}
               onValueChange={(val) => handleChange('username', val)}
               customClass="input input-bordered w-full"
-              />
+            />
           </div>
           <div className="mb-10">
             <label htmlFor="password" className="text-sm">
@@ -83,7 +83,7 @@ function RouteComponent() {
               value={form.password}
               onValueChange={(val) => handleChange('password', val)}
               customClass="input input-bordered w-full"
-              />
+            />
           </div>
           <Button customClass="primary w-full mb-10" label="Login" />
           {error && <p className="text-danger text-sm">{error}</p>}

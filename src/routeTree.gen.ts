@@ -10,13 +10,13 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as TodoImport } from './routes/todo'
-import { Route as ProductImport } from './routes/product'
-import { Route as LoginImport } from './routes/login'
-import { Route as CartImport } from './routes/cart'
-import { Route as IndexImport } from './routes/index'
-import { Route as ProductProductNameProductIdImport } from './routes/product_.$productName.$productId'
+import { Route as rootRoute } from './routes/__root';
+import { Route as TodoImport } from './routes/todo';
+import { Route as ProductImport } from './routes/product';
+import { Route as LoginImport } from './routes/login';
+import { Route as CartImport } from './routes/cart';
+import { Route as IndexImport } from './routes/index';
+import { Route as ProductProductNameProductIdImport } from './routes/product_.$productName.$productId';
 
 // Create/Update Routes
 
@@ -24,135 +24,135 @@ const TodoRoute = TodoImport.update({
   id: '/todo',
   path: '/todo',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProductRoute = ProductImport.update({
   id: '/product',
   path: '/product',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const CartRoute = CartImport.update({
   id: '/cart',
   path: '/cart',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProductProductNameProductIdRoute =
   ProductProductNameProductIdImport.update({
     id: '/product_/$productName/$productId',
     path: '/product/$productName/$productId',
     getParentRoute: () => rootRoute,
-  } as any)
+  } as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/cart';
+      path: '/cart';
+      fullPath: '/cart';
+      preLoaderRoute: typeof CartImport;
+      parentRoute: typeof rootRoute;
+    };
     '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/login';
+      path: '/login';
+      fullPath: '/login';
+      preLoaderRoute: typeof LoginImport;
+      parentRoute: typeof rootRoute;
+    };
     '/product': {
-      id: '/product'
-      path: '/product'
-      fullPath: '/product'
-      preLoaderRoute: typeof ProductImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/product';
+      path: '/product';
+      fullPath: '/product';
+      preLoaderRoute: typeof ProductImport;
+      parentRoute: typeof rootRoute;
+    };
     '/todo': {
-      id: '/todo'
-      path: '/todo'
-      fullPath: '/todo'
-      preLoaderRoute: typeof TodoImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/todo';
+      path: '/todo';
+      fullPath: '/todo';
+      preLoaderRoute: typeof TodoImport;
+      parentRoute: typeof rootRoute;
+    };
     '/product_/$productName/$productId': {
-      id: '/product_/$productName/$productId'
-      path: '/product/$productName/$productId'
-      fullPath: '/product/$productName/$productId'
-      preLoaderRoute: typeof ProductProductNameProductIdImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/product_/$productName/$productId';
+      path: '/product/$productName/$productId';
+      fullPath: '/product/$productName/$productId';
+      preLoaderRoute: typeof ProductProductNameProductIdImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/cart': typeof CartRoute
-  '/login': typeof LoginRoute
-  '/product': typeof ProductRoute
-  '/todo': typeof TodoRoute
-  '/product/$productName/$productId': typeof ProductProductNameProductIdRoute
+  '/': typeof IndexRoute;
+  '/cart': typeof CartRoute;
+  '/login': typeof LoginRoute;
+  '/product': typeof ProductRoute;
+  '/todo': typeof TodoRoute;
+  '/product/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/cart': typeof CartRoute
-  '/login': typeof LoginRoute
-  '/product': typeof ProductRoute
-  '/todo': typeof TodoRoute
-  '/product/$productName/$productId': typeof ProductProductNameProductIdRoute
+  '/': typeof IndexRoute;
+  '/cart': typeof CartRoute;
+  '/login': typeof LoginRoute;
+  '/product': typeof ProductRoute;
+  '/todo': typeof TodoRoute;
+  '/product/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/cart': typeof CartRoute
-  '/login': typeof LoginRoute
-  '/product': typeof ProductRoute
-  '/todo': typeof TodoRoute
-  '/product_/$productName/$productId': typeof ProductProductNameProductIdRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexRoute;
+  '/cart': typeof CartRoute;
+  '/login': typeof LoginRoute;
+  '/product': typeof ProductRoute;
+  '/todo': typeof TodoRoute;
+  '/product_/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/cart'
     | '/login'
     | '/product'
     | '/todo'
-    | '/product/$productName/$productId'
-  fileRoutesByTo: FileRoutesByTo
+    | '/product/$productName/$productId';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/cart'
     | '/login'
     | '/product'
     | '/todo'
-    | '/product/$productName/$productId'
+    | '/product/$productName/$productId';
   id:
     | '__root__'
     | '/'
@@ -160,17 +160,17 @@ export interface FileRouteTypes {
     | '/login'
     | '/product'
     | '/todo'
-    | '/product_/$productName/$productId'
-  fileRoutesById: FileRoutesById
+    | '/product_/$productName/$productId';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  CartRoute: typeof CartRoute
-  LoginRoute: typeof LoginRoute
-  ProductRoute: typeof ProductRoute
-  TodoRoute: typeof TodoRoute
-  ProductProductNameProductIdRoute: typeof ProductProductNameProductIdRoute
+  IndexRoute: typeof IndexRoute;
+  CartRoute: typeof CartRoute;
+  LoginRoute: typeof LoginRoute;
+  ProductRoute: typeof ProductRoute;
+  TodoRoute: typeof TodoRoute;
+  ProductProductNameProductIdRoute: typeof ProductProductNameProductIdRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -180,11 +180,11 @@ const rootRouteChildren: RootRouteChildren = {
   ProductRoute: ProductRoute,
   TodoRoute: TodoRoute,
   ProductProductNameProductIdRoute: ProductProductNameProductIdRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

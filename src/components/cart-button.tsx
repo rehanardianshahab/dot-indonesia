@@ -7,7 +7,10 @@ const CartButton: React.FC<{ product: CartItem }> = ({ product }) => {
   const addToCart = useCartStore((state) => state.addToCart);
 
   return (
-    <div className="text-accent cursor-pointer" onClick={() => addToCart(product)}>
+    <div
+      className="text-accent cursor-pointer"
+      onClick={() => addToCart(product)}
+    >
       <TbShoppingCartPlus />
     </div>
   );

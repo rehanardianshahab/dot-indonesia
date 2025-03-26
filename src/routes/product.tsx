@@ -28,8 +28,10 @@ function ProductList() {
       try {
         setLoading(true);
         setError(null);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const apiUrl = import.meta.env.VITE_API_URL;
+
         const response = await fetch(`${apiUrl}/category/sports-accessories`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -37,8 +39,8 @@ function ProductList() {
 
         const data = await response.json();
         setProducts(data.products);
-      } catch (err: any) {
-        setError(err.message || 'Something went wrong while fetching data');
+      } catch {
+        setError('Something went wrong while fetching data');
       } finally {
         setLoading(false);
       }
@@ -60,18 +62,31 @@ function ProductList() {
       {products.map((product: CartItem) => (
         <div className="grid-item" key={product.id}>
           <div className="card">
-            <img src={product.thumbnail} width="100%"/>
+            <img src={product.thumbnail} width="100%" />
             <div className="card-body gap-10">
               <h3 className="text-primary">{product.title}</h3>
-              <p><TbStarHalfFilled className="text-warning"/> {product.rating}</p>
-              <p><strong>${product.price}</strong></p>
+              <p>
+                <TbStarHalfFilled className="text-warning" /> {product.rating}
+              </p>
+              <p>
+                <strong>${product.price}</strong>
+              </p>
               <div className="flex items-center mt-10 ">
                 <div className="w-full">
-                  <Link to="/product/$productName/$productId"  params={{ productId: String(product.id), productName: product.title.toLowerCase().split(' ').join('-') }}>
-                    <Button label="Detail" customClass="w-full primary"/>
+                  <Link
+                    to="/product/$productName/$productId"
+                    params={{
+                      productId: String(product.id),
+                      productName: product.title
+                        .toLowerCase()
+                        .split(' ')
+                        .join('-'),
+                    }}
+                  >
+                    <Button label="Detail" customClass="w-full primary" />
                   </Link>
                 </div>
-                <CartButton product={product}/>
+                <CartButton product={product} />
               </div>
             </div>
           </div>

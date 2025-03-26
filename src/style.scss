@@ -155,7 +155,7 @@ a {
   width: calc(100vw - 15px);
   gap: 20px;
   justify-content: space-between;
-  
+
   & > .navbar-body {
     display: flex;
     gap: 20px;
@@ -272,26 +272,25 @@ input {
 }
 
 .grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 kolom secara default */
-    gap: 20px; /* Jarak antar-item */
-    box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom secara default */
+  gap: 20px; /* Jarak antar-item */
+  box-sizing: border-box;
 
-    @media (max-width: 1023px) and (min-width: 768px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  @media (max-width: 1023px) and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    @media (max-width: 767px) and (min-width: 481px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  @media (max-width: 767px) and (min-width: 481px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    @media (max-width: 480px) {
-        grid-template-columns: 1fr;
-    }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .grid-item {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-

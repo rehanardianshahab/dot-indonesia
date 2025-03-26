@@ -16,7 +16,7 @@
     "baseUrl": "src",
     "paths": {
       "@stores/*": ["stores/*"]
-    },
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"],

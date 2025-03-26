@@ -2,6 +2,7 @@ import { createFileRoute, Link, useParams } from '@tanstack/react-router';
 import React from 'react';
 import { TbChevronRight, TbStarHalfFilled } from 'react-icons/tb';
 import CartButton from '../components/cart-button';
+import { CartItem } from 'types/cart';
 
 export const Route = createFileRoute('/product_/$productName/$productId')({
   component: RouteComponent,
@@ -9,7 +10,14 @@ export const Route = createFileRoute('/product_/$productName/$productId')({
 
 function RouteComponent() {
   const { productId } = useParams({ from: Route.id });
-  const [product, setProduct] = React.useState<any>(null);
+  const [product, setProduct] = React.useState<CartItem>({
+    id: 0,
+    title: '',
+    price: 0,
+    description: '',
+    thumbnail: '',
+    rating: '',
+  });
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -19,8 +27,10 @@ function RouteComponent() {
         setLoading(true);
 
         setError(null);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const apiUrl = import.meta.env.VITE_API_URL;
+
         const response = await fetch(`${apiUrl}/${productId}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -28,8 +38,8 @@ function RouteComponent() {
 
         const data = await response.json();
         setProduct(data);
-      } catch (err: any) {
-        setError(err.message || 'Something went wrong while fetching the product');
+      } catch {
+        setError('Something went wrong while fetching the product');
       } finally {
         setLoading(false);
       }
@@ -39,7 +49,11 @@ function RouteComponent() {
   }, [productId]);
 
   if (loading) {
-    return <div className="container"><p>Loading product...</p></div>;
+    return (
+      <div className="container">
+        <p>Loading product...</p>
+      </div>
+    );
   }
 
   if (error) {
@@ -55,16 +69,24 @@ function RouteComponent() {
 
   return (
     <div className="container">
-      <Breadcrum name={product.title}/>
+      <Breadcrum name={product.title} />
       <div className="card">
         <div className="card-body">
           <h1 className="text-primary mb-10">{product.title}</h1>
           <div className="product-details">
             <p>{product.description}</p>
-            <p><TbStarHalfFilled className="text-warning"/> {product.rating}</p>
-            <p><strong>Price:</strong> ${product.price}</p>
+            <p>
+              <TbStarHalfFilled className="text-warning" /> {product.rating}
+            </p>
+            <p>
+              <strong>Price:</strong> ${product.price}
+            </p>
             <div className="flex items-center">
-              <img src={product.thumbnail} alt={product.title} className="w-1-3" />
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className="w-1-3"
+              />
               <CartButton product={product} />
             </div>
           </div>
@@ -74,14 +96,18 @@ function RouteComponent() {
   );
 }
 
-function Breadcrum({name}: {name:string}) {
+function Breadcrum({ name }: { name: string }) {
   return (
     <div className="flex items-center bg-disable card card-body mb-10">
       <div>
-        <Link className="text-primary font-bold" to="/product">Shop</Link>
+        <Link className="text-primary font-bold" to="/product">
+          Shop
+        </Link>
       </div>
-      <div><TbChevronRight/></div>
+      <div>
+        <TbChevronRight />
+      </div>
       <div>{name}</div>
     </div>
-  )
+  );
 }

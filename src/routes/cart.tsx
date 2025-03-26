@@ -6,5 +6,9 @@ export const Route = createFileRoute('/cart')({
 });
 
 function Cart() {
-  return <><CartList/></>;
+  return (
+    <>
+      <CartList />
+    </>
+  );
 }

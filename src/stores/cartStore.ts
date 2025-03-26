@@ -38,14 +38,18 @@ const useCartStore = create<CartState>((set) => ({
   cart: [],
   addToCart: (item) =>
     set((state) => {
-      const existingItem = state.cart.find((cartItem) => Number(cartItem.id) === Number(item.id));
+      const existingItem = state.cart.find(
+        (cartItem) => Number(cartItem.id) === Number(item.id),
+      );
       if (existingItem) {
-        notifySuccess(`Add ${existingItem.title} qty ${(existingItem.quantity || 0) + 1}`);
+        notifySuccess(
+          `Add ${existingItem.title} qty ${(existingItem.quantity || 0) + 1}`,
+        );
         return {
           cart: state.cart.map((cartItem) =>
             cartItem.id === item.id
               ? { ...cartItem, quantity: (cartItem.quantity || 0) + 1 }
-              : cartItem
+              : cartItem,
           ),
         };
       } else {
@@ -55,12 +59,12 @@ const useCartStore = create<CartState>((set) => ({
         };
       }
     }),
-  removeFromCart: (id) =>{
+  removeFromCart: (id) => {
     notifyError('Product removed from cart');
-      set((state) => ({
-        cart: state.cart.filter((item) => item.id !== id),
-      }))
-    }
+    set((state) => ({
+      cart: state.cart.filter((item) => item.id !== id),
+    }));
+  },
 }));
 
 export default useCartStore;
