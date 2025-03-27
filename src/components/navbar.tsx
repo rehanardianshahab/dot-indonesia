@@ -41,7 +41,7 @@ export default function Navbar() {
             return null;
 
           return (
-            <Link key={index} to={data.link} className="[&.active]:font-bold">
+            <Link key={index} to={data.link} className="text-primary">
               {data.label}
             </Link>
           );

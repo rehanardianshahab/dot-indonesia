@@ -24,12 +24,8 @@ export default function CartList() {
         <div>
           <div className="grid">
             {cart.map((item: CartItem) => (
-              <div key={item.id} className="card">
-                <img
-                  src={item.thumbnail}
-                  alt={item.title}
-                  className="w-16 h-16 object-cover rounded-md"
-                />
+              <div key={item.id} className="grid-item">
+                <img src={item.thumbnail} alt={item.title} width="100%" />
 
                 <div className="card-body">
                   <h3 className="text-lg font-semibold">{item.title}</h3>
