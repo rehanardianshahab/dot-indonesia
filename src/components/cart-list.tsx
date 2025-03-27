@@ -1,5 +1,7 @@
+import { TbStarFilled } from 'react-icons/tb';
 import useCartStore from '../stores/cartStore';
 import { CartItem } from 'types/cart';
+import Button from './button';
 
 export default function CartList() {
   const cart: CartItem[] = useCartStore((state) => state.cart);
@@ -19,54 +21,47 @@ export default function CartList() {
           <p className="text-primary font-bold">Your cart is empty.</p>
         </div>
       ) : (
-        <>
-          <ul className="space-y-4">
+        <div>
+          <div className="grid">
             {cart.map((item: CartItem) => (
-              <li
-                key={item.id}
-                className="cart-item flex items-center gap-4 p-4 border rounded-md shadow-sm"
-              >
+              <div key={item.id} className="card">
                 <img
                   src={item.thumbnail}
                   alt={item.title}
                   className="w-16 h-16 object-cover rounded-md"
                 />
 
-                <div className="flex-grow">
+                <div className="card-body">
                   <h3 className="text-lg font-semibold">{item.title}</h3>
+                </div>
+                <div className="flex card-body">
                   <p className="text-sm text-gray-600">Price: ${item.price}</p>
                   <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                   <p className="text-sm text-gray-600">
                     Total: {(Number(item.quantity) * item.price).toFixed(2)}
                   </p>
-                  <div className="text-sm text-yellow-500 flex items-center">
-                    {Array.from(
-                      { length: Math.round(Number(item.rating)) },
-                      (_, i) => (
-                        <span key={i}>⭐</span>
-                      ),
-                    )}
-                    <span className="ml-2 text-gray-500">({item.rating})</span>
-                  </div>
                 </div>
-
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  Remove
-                </button>
-              </li>
+                <div className="text-sm card-body">
+                  <TbStarFilled className="text-warning" />{' '}
+                  <span className="ml-2 text-gray-500">({item.rating})</span>
+                </div>
+                <div className="text-center mb-10">
+                  <Button
+                    onClick={() => removeFromCart(item.id)}
+                    label="Remove"
+                    customClass="danger"
+                  />
+                </div>
+              </div>
             ))}
-          </ul>
-
-          <div className="mt-6 p-4 border-t text-right">
+          </div>
+          <div className="mt-30">
             <h3 className="text-lg font-semibold">
               Total Amount:{' '}
               <span className="text-green-600">${totalAmount.toFixed(2)}</span>
             </h3>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

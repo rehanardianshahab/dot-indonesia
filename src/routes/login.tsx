@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import Button from '../components/button';
 import Input from '../components/input';
 import React, { useState } from 'react';
@@ -17,7 +17,6 @@ export const Route = createFileRoute('/login')({
 function RouteComponent() {
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
   const notifySuccess = (message: string) =>
     toast.success(message, {
       position: 'top-center',
@@ -40,12 +39,12 @@ function RouteComponent() {
     setError(null);
 
     try {
-      loginSchema.parse(form); // Validasi dengan Zod
+      loginSchema.parse(form);
       if (form.username === 'admin' && form.password === 'admin') {
-        localStorage.setItem('isLoggedIn', 'true'); // Simpan status login
+        localStorage.setItem('isLoggedIn', 'true');
         notifySuccess('Login successful!');
         setForm({ username: '', password: '' });
-        navigate({ to: '/' });
+        window.location.reload();
       } else {
         setError('Invalid username or password');
       }

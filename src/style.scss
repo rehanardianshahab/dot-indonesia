@@ -15,6 +15,7 @@
   --disable: #9c9c9c;
   --backdrop: #f2f2f294;
   --danger: #ff0a0a;
+  --hover-danger: #c70303;
   --warning: #ffda0a;
 }
 
@@ -49,6 +50,10 @@ body {
 a {
   text-decoration: none;
   transition: 0.2s ease-in;
+}
+
+.gap {
+  gap: 20px;
 }
 
 .flex {
@@ -183,6 +188,15 @@ button {
 
     &:hover {
       background-color: var(--hover-primary);
+    }
+  }
+
+  &.danger {
+    background-color: var(--danger);
+    color: white;
+
+    &:hover {
+      background-color: var(--hover-danger);
     }
   }
 }

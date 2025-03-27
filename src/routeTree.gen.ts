@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root';
 import { Route as TodoImport } from './routes/todo';
+import { Route as RegisterImport } from './routes/register';
 import { Route as ProductImport } from './routes/product';
 import { Route as LoginImport } from './routes/login';
 import { Route as CartImport } from './routes/cart';
@@ -23,6 +24,12 @@ import { Route as ProductProductNameProductIdImport } from './routes/product_.$p
 const TodoRoute = TodoImport.update({
   id: '/todo',
   path: '/todo',
+  getParentRoute: () => rootRoute,
+} as any);
+
+const RegisterRoute = RegisterImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -89,6 +96,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductImport;
       parentRoute: typeof rootRoute;
     };
+    '/register': {
+      id: '/register';
+      path: '/register';
+      fullPath: '/register';
+      preLoaderRoute: typeof RegisterImport;
+      parentRoute: typeof rootRoute;
+    };
     '/todo': {
       id: '/todo';
       path: '/todo';
@@ -113,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute;
   '/login': typeof LoginRoute;
   '/product': typeof ProductRoute;
+  '/register': typeof RegisterRoute;
   '/todo': typeof TodoRoute;
   '/product/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
@@ -122,6 +137,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute;
   '/login': typeof LoginRoute;
   '/product': typeof ProductRoute;
+  '/register': typeof RegisterRoute;
   '/todo': typeof TodoRoute;
   '/product/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
@@ -132,6 +148,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute;
   '/login': typeof LoginRoute;
   '/product': typeof ProductRoute;
+  '/register': typeof RegisterRoute;
   '/todo': typeof TodoRoute;
   '/product_/$productName/$productId': typeof ProductProductNameProductIdRoute;
 }
@@ -143,6 +160,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/login'
     | '/product'
+    | '/register'
     | '/todo'
     | '/product/$productName/$productId';
   fileRoutesByTo: FileRoutesByTo;
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/login'
     | '/product'
+    | '/register'
     | '/todo'
     | '/product/$productName/$productId';
   id:
@@ -159,6 +178,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/login'
     | '/product'
+    | '/register'
     | '/todo'
     | '/product_/$productName/$productId';
   fileRoutesById: FileRoutesById;
@@ -169,6 +189,7 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute;
   LoginRoute: typeof LoginRoute;
   ProductRoute: typeof ProductRoute;
+  RegisterRoute: typeof RegisterRoute;
   TodoRoute: typeof TodoRoute;
   ProductProductNameProductIdRoute: typeof ProductProductNameProductIdRoute;
 }
@@ -178,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   LoginRoute: LoginRoute,
   ProductRoute: ProductRoute,
+  RegisterRoute: RegisterRoute,
   TodoRoute: TodoRoute,
   ProductProductNameProductIdRoute: ProductProductNameProductIdRoute,
 };
@@ -196,6 +218,7 @@ export const routeTree = rootRoute
         "/cart",
         "/login",
         "/product",
+        "/register",
         "/todo",
         "/product_/$productName/$productId"
       ]
@@ -211,6 +234,9 @@ export const routeTree = rootRoute
     },
     "/product": {
       "filePath": "product.tsx"
+    },
+    "/register": {
+      "filePath": "register.tsx"
     },
     "/todo": {
       "filePath": "todo.tsx"
